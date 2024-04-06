@@ -94,11 +94,21 @@ def lemmatized_words(df):
     return df
 
 
+def correct_words_final(df):
+
+    spell = Speller()
+
+    # Auto-correct words
+    df['Extra Corrected Words'] = df['Lemmatized Words'].apply(spell)
+
+    print('Step Correct_Words_final completed ---> Corrected words in dataset.')
+    return df
+
 
 # Dropping duplicated words from dataset
 def unique_words(df):
 
-    df['Unique Words'] = df['Lemmatized Words'][~df['Lemmatized Words'].duplicated(keep='first')]
+    df['Unique Words'] = df['Extra Corrected Words'][~df['Extra Corrected Words'].duplicated(keep='first')]
     print(df)
     print('Step Delete_Duplicate_Words completed ---> Droped duplicated words from dataset.')
 
@@ -118,7 +128,7 @@ def report_export_df(df):
     # Update indexes new dataframe
     df_new.reset_index(drop=True, inplace=True)
     # Export dataset to csv
-    df_new.to_csv('output_Unique_Words_without_NaN.csv', index=False)
+    df_new.to_csv('/home/farid/Documents/words_cleaning/src/Unique_Words_without_NaN.csv', index=False)
     print('Step final completed ---> Exported final csv file from dataset.')
     print(f'Count of first dataset is : {count_total} and count of duplicated words are : {count_nan} So final export csv conisist of : {count_total - count_nan} entities.')
     return df_new
