@@ -15,12 +15,12 @@ def main():
 
 
 
-    time.sleep(10)
+    time.sleep(5)
 
     
 
     # Read data
-    df = pd.read_csv('/home/farid/Documents/words_cleaning/src/english_tokens.csv', header=None)
+    df = pd.read_csv('/home/farid/Documents/TAAV_vscode_prj/words_cleaning/src/english_tokens.csv', header=None)
     df.rename(columns={0: 'Words'}, inplace=True)
 
     

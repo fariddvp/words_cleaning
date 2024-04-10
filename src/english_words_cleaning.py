@@ -41,7 +41,7 @@ def reduce_repeated_characters(df):
 #Function for remove non-meaningful words from dataset.
 def remove_non_meaningful_words(df):
     df['Meaning Words'] = df['Reduction Words'].apply(lambda x: '' if not wordnet.synsets(x) else x)
-#     df = df[df['Meaning Words'] != '']  # Remove rows with empty words
+    df = df[df['Meaning Words'] != '']  # Remove rows with empty words
     
     print('Step Delete_Non_Meaning_words completed ---> Remove non-meaningful words from dataset.')
     return df
@@ -127,8 +127,18 @@ def report_export_df(df):
     df_new = pd.DataFrame(df[~df['Unique Words'].isna()].loc[:,'Unique Words'])
     # Update indexes new dataframe
     df_new.reset_index(drop=True, inplace=True)
+
+    PATH_csv = '/home/farid/Documents/TAAV_vscode_prj/words_cleaning/src/Output_Unique_Words.csv'
     # Export dataset to csv
-    df_new.to_csv('/home/farid/Documents/words_cleaning/src/Unique_Words_without_NaN.csv', index=False)
+    df_new.to_csv(PATH_csv, index=False)
+
+    # Export dataset to txt
+    PATH_txt = '/home/farid/Documents/TAAV_vscode_prj/words_cleaning/src/Output_Unique_Words.txt'
+    with open(PATH_txt,'w+') as file:
+        for word in df_new['Unique Words']:
+            file.write(word + '\n')
+
+
     print('Step final completed ---> Exported final csv file from dataset.')
     print(f'Count of first dataset is : {count_total} and count of duplicated words are : {count_nan} So final export csv conisist of : {count_total - count_nan} entities.')
     return df_new

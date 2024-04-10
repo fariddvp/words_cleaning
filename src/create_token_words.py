@@ -11,7 +11,7 @@ nltk.download("stopwords")
 def create_token_words():
 
     # Read raw dataset
-    english_df = pd.read_csv('/home/farid/Documents/words_cleaning/src/english_dataset.csv', header=None)
+    english_df = pd.read_csv('/home/farid/Documents/TAAV_vscode_prj/words_cleaning/src/english_dataset.csv', header=None)
     print(english_df)
     print('step 01: Dataframe read...')
 
@@ -75,7 +75,7 @@ def create_token_words():
 
 
     # Write tokens to CSV
-    csv_file_path = "/home/farid/Documents/words_cleaning/src/english_tokens.csv"
+    csv_file_path = '/home/farid/Documents/TAAV_vscode_prj/words_cleaning/src/english_tokens.csv'
     with open(csv_file_path, "w", newline="") as csv_file:
         writer = csv.writer(csv_file)
         for token in clean_stop_words_tokens:
